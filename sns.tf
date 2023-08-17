@@ -3,8 +3,9 @@ resource "aws_sns_topic" "this" {
 
   name              = var.sns_topic_name
   delivery_policy   = var.sns_delivery_policy
-  kms_master_key_id = var.sns_kms_key_id
   fifo_topic        = var.fifo_topic
+  kms_master_key_id = var.sns_kms_key_id
+  tags              = merge(var.tags, var.sns_tags)
 
   lifecycle {
     precondition {

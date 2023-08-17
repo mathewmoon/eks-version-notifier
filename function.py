@@ -22,6 +22,7 @@ ARCH = environ.get("ARCH", "x86_64")
 NOTIFY_AMI = bool(environ.get("NOTIFY_AMI"))
 NOTIFY_EKS = bool(environ.get("NOTIFY_EKS"))
 FORCE_RUN = False
+ADDITIONAL_MESSAGE_INFO = environ.get("ADDITIONAL_MESSAGE_INFO", "")
 
 if not (SEND_EMAIL or PUBLISH_SNS):
   LOGGER.warning("Running with SEND_EMAIL or PUBLISH_SNS set to False. Will only generate logs.")    
@@ -60,6 +61,7 @@ def put_parameter(value: str, parameter: str = EKS_VERSIONS_PARAMETER) -> None:
 
 def notify(subject: str, body: str = None, email: bool = True, sns: bool = False) -> None:
     body = body or subject
+    body += f"\n{ADDITIONAL_MESSAGE_INFO}"
 
     if email:
         send_email(subject, body)

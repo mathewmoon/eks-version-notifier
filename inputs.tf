@@ -161,3 +161,45 @@ variable "fifo_topic" {
   type        = bool
   default     = false
 }
+
+variable "lambda_tags" {
+  description = "Extra tags to add to Lambda"
+  type        = map(string)
+  default     = {}
+}
+
+variable "sns_tags" {
+  description = "Extra tags to add to SNS topic"
+  type        = map(string)
+  default     = {}
+}
+
+variable "parameter_tags" {
+  description = "Extra tags to add to SSM Parameters"
+  type        = map(string)
+  default     = {}
+}
+
+variable "tags" {
+  description = "Tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "role_tags" {
+  description = "Tags to add to Lambda's IAM role"
+  type        = map(string)
+  default     = {}
+}
+
+variable "role_policy_tags" {
+  description = "Tags to add to Lambda's IAM role policy"
+  type        = map(string)
+  default     = {}
+}
+
+variable "additional_notification_text" {
+  description = "Additional text to add to SNS notifications and emails"
+  type        = string
+  default     = ""
+}
