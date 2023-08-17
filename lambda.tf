@@ -13,6 +13,7 @@ resource "aws_lambda_function" "this" {
   runtime          = "python3.8"
   memory_size      = var.lambda_memory_size
   timeout          = var.lambda_timeout
+  tags             = merge(var.tags, var.lambda_tags)
 
   environment {
     variables = {
@@ -28,6 +29,8 @@ resource "aws_lambda_function" "this" {
       FROM_ADDRESS                  = var.from_address
       TO_ADDRESS                    = var.to_address
       SNS_TOPIC                     = var.sns_topic_arn == null && var.sns_topic_name == null ? "" : var.sns_topic_arn != null ? var.sns_topic_arn : aws_sns_topic.this[0].arn
+      BOTTLEROCKET                  = var.bottlerocket ? "true" : ""
+      ADDITIONAL_MESSAGE_INFO       = var.additional_notification_text
     }
   }
 

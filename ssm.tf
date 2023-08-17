@@ -3,6 +3,7 @@ resource "aws_ssm_parameter" "current_eks_version_parameter_name" {
 
   name  = var.current_eks_version_parameter_name
   type  = "String"
+  tags  = merge(var.tags, var.parameter_tags)
   value = var.current_eks_version
 }
 
@@ -11,6 +12,7 @@ resource "aws_ssm_parameter" "versions_parameter_name" {
 
   name  = var.versions_parameter_name
   type  = "String"
+  tags  = merge(var.tags, var.parameter_tags)
   value = "{}"
 
   lifecycle {

@@ -72,13 +72,19 @@ No modules.
 | [aws_ssm_parameter.current_eks_version_parameter_name](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.versions_parameter_name](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [archive_file.lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.lambda_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.lambda_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_ssm_parameter.current_eks_version](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
+| [aws_ssm_parameter.eks_versions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_notification_text"></a> [additional\_notification\_text](#input\_additional\_notification\_text) | Additional text to add to SNS notifications and emails | `string` | `""` | no |
 | <a name="input_architecture"></a> [architecture](#input\_architecture) | The architecture for the AMI. If var.bottlerocket is `false` then this is mutually exclusive with var.gpu | `string` | `"x86_64"` | no |
 | <a name="input_bottlerocket"></a> [bottlerocket](#input\_bottlerocket) | Whether or not to use Bottlerocket AMI | `bool` | `true` | no |
 | <a name="input_create_parameters"></a> [create\_parameters](#input\_create\_parameters) | If `true` then create the parameters | `any` | n/a | yes |
@@ -90,18 +96,24 @@ No modules.
 | <a name="input_lambda_log_retention_days"></a> [lambda\_log\_retention\_days](#input\_lambda\_log\_retention\_days) | Retention in days to apply to the Function's Cloudwatch log | `number` | `14` | no |
 | <a name="input_lambda_memory_size"></a> [lambda\_memory\_size](#input\_lambda\_memory\_size) | The amount of RAM to allocate to the function | `number` | `1024` | no |
 | <a name="input_lambda_name"></a> [lambda\_name](#input\_lambda\_name) | Name for the newly created Lambda | `string` | n/a | yes |
+| <a name="input_lambda_tags"></a> [lambda\_tags](#input\_lambda\_tags) | Extra tags to add to Lambda | `map(string)` | `{}` | no |
 | <a name="input_lambda_timeout"></a> [lambda\_timeout](#input\_lambda\_timeout) | The timeout for the function in seconds | `number` | `30` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Log level for Lambda function | `string` | n/a | yes |
 | <a name="input_notify_ami"></a> [notify\_ami](#input\_notify\_ami) | Whether the function should actually send notifications for AMI updates | `bool` | `false` | no |
 | <a name="input_notify_eks"></a> [notify\_eks](#input\_notify\_eks) | Whether the function should actually send notifications for EKS versions | `bool` | `false` | no |
+| <a name="input_parameter_tags"></a> [parameter\_tags](#input\_parameter\_tags) | Extra tags to add to SSM Parameters | `map(string)` | `{}` | no |
 | <a name="input_publish_sns"></a> [publish\_sns](#input\_publish\_sns) | Whether to publish to SNS topic | `any` | n/a | yes |
+| <a name="input_role_policy_tags"></a> [role\_policy\_tags](#input\_role\_policy\_tags) | Tags to add to Lambda's IAM role policy | `map(string)` | `{}` | no |
+| <a name="input_role_tags"></a> [role\_tags](#input\_role\_tags) | Tags to add to Lambda's IAM role | `map(string)` | `{}` | no |
 | <a name="input_schedule_expression"></a> [schedule\_expression](#input\_schedule\_expression) | A valid CloudWatch schedule expression that will be used for triggering the Lambda | `string` | `"rate(12 hours)"` | no |
 | <a name="input_send_email"></a> [send\_email](#input\_send\_email) | Whether to send email via SES | `string` | `null` | no |
 | <a name="input_sns_delivery_policy"></a> [sns\_delivery\_policy](#input\_sns\_delivery\_policy) | Deliver policy for created SNS topics | `string` | `null` | no |
 | <a name="input_sns_kms_key_id"></a> [sns\_kms\_key\_id](#input\_sns\_kms\_key\_id) | Existing KMS key to use for encrypting the SNS topic | `string` | `null` | no |
+| <a name="input_sns_tags"></a> [sns\_tags](#input\_sns\_tags) | Extra tags to add to SNS topic | `map(string)` | `{}` | no |
 | <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | The ARN of an existing SNS topic to publish to. Mutually exclusive to var.sns\_topic\_name | `string` | `null` | no |
 | <a name="input_sns_topic_name"></a> [sns\_topic\_name](#input\_sns\_topic\_name) | Name for SNS topic to create. Mutually exclusive to var.sns\_topic\_arn | `string` | `null` | no |
 | <a name="input_sns_topic_policy"></a> [sns\_topic\_policy](#input\_sns\_topic\_policy) | A policy to attach to the created SNS topic. Cannot be used when specifying an existing topic using var.sns\_topic\_arn | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to add to all resources | `map(string)` | `{}` | no |
 | <a name="input_to_address"></a> [to\_address](#input\_to\_address) | The To address to use with SES | `string` | `""` | no |
 | <a name="input_versions_parameter_name"></a> [versions\_parameter\_name](#input\_versions\_parameter\_name) | Name to use for storing EKS and corresponding AMI versions | `string` | n/a | yes |
 
