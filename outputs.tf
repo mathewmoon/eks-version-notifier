@@ -1,6 +1,6 @@
 output "sns_topic" {
   description = "The SNS topic that new versions are sent to"
-  value       = coalesce(try(aws_sns_topic.this[0].arn, null), var.sns_topic_arn)
+  value       = var.sns_topic_arn != null ? var.sns_topic_arn : try(aws_sns_topic.this[0].arn, "")
 }
 
 output "function_arn" {
@@ -30,5 +30,5 @@ output "eventbridge_rule_arn" {
 
 output "sns_topic_policy" {
   description = "The resource policy applied to the SNS topic"
-  value       = try(jsondecode(aws_sns_topic.this[0].policy))
+  value       = try(jsondecode(aws_sns_topic.this[0].policy), "")
 }
