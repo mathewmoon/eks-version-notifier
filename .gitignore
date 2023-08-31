@@ -12,6 +12,7 @@ test*
 terraform.tfstate
 terraform.tfstate*
 terraform.tfvars
+deployment/
 
 # CMake
 cmake-build-debug/
