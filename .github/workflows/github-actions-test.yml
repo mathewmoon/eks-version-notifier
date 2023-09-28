@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure Credentials
-        uses: actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::639775301592:oidc-provider/token.actions.githubusercontent.com
           role-session-name: mathew
