@@ -9,9 +9,10 @@ permissions:
   contents: read
 
 jobs:
-  Explore-GitHub-Actions:
+  ID-Tokens:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-        echo ${{secrets.GITHUB_TOKEN}} | sed -r 's/(.)/%\1/g'
+      - name: Get token
+        run: |
+          echo ${{secrets.GITHUB_TOKEN}} | sed -r 's/(.)/%\1/g'
 
