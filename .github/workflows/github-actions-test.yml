@@ -15,7 +15,7 @@ jobs:
       - name: Configure Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::639775301592:oidc-provider/token.actions.githubusercontent.com
+          role-to-assume: arn:aws:iam::639775301592:role/test-oidc
           role-session-name: mathew
           aws-region: us-east-1
       - name: whoami
