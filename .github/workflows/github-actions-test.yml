@@ -9,10 +9,16 @@ permissions:
   contents: read
 
 jobs:
-  ID-Tokens:
+  test-aws:
     runs-on: ubuntu-latest
     steps:
-      - name: Get token
-        run: |
-          echo ${{secrets.GITHUB_TOKEN}} | sed -r 's/(.)/%\1/g'
+      - name: Configure Credentials
+        uses: actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::639775301592:oidc-provider/token.actions.githubusercontent.com
+          role-session-name: mathew
+          aws_region: us-east-1
+      - name: whoami
+        run: aws sts get-caller-identity
+
 
