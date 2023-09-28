@@ -17,7 +17,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::639775301592:oidc-provider/token.actions.githubusercontent.com
           role-session-name: mathew
-          aws_region: us-east-1
+          aws-region: us-east-1
       - name: whoami
         run: aws sts get-caller-identity
 
